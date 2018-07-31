@@ -1,5 +1,5 @@
 #ifndef CTCI_SRC_STYLE_H_
-#def CTCI_SRC_STYLE_H_
+#define CTCI_SRC_STYLE_H_
 
 #include <iostream>
 
