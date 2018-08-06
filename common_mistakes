@@ -1,0 +1,5 @@
+std::
+int/uint as a loop index
+char: think of ASCII (vector<bool>, ...)
+uint: small minus big yields super big: no sign, can't be negative...
+
