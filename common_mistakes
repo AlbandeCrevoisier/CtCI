@@ -2,4 +2,12 @@ std::
 int/uint as a loop index
 char: think of ASCII (vector<bool>, ...)
 uint: small minus big yields super big: no sign, can't be negative...
-
+Don't use a pointer if you don't need to (struct & all).
+. / ->
+emplace(element) / insert(it_before_which, it_begin, it_end)
+; after struct {}
+looping linked list break almost everything.
+int() vs int{}
+Think about the complexity of the algorithm a bit more.
+STL with pointers, not struct.
+push / push_back
