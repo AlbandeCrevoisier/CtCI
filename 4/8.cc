@@ -1,7 +1,7 @@
 /* First Common Ancestor
-Find the first common ancestor of two nodes in a binary tree. Avoid storing
-additional nodes.
-Hypothesis: each node has a reference to its parent node. */
+Find the first common ancestor of two nodes in a binary tree-> Avoid storing
+additional nodes->
+Hypothesis: each node has a reference to its parent node-> */
 
 #include <iostream>
 
@@ -13,29 +13,28 @@ struct Node {
   Node *right;
 };
 
-*Node FirstCommonAncestor(Node *tree, Node *first_node, Node *second_node) {
-  int depth_first_node = 0;
-  int depth_second_node = 0;
+Node* FirstCommonAncestor(Node *root, Node *first_node, Node *second_node) {
+  int depth_first_node = 0, depth_second_node = 0;
   Node *tmp = first_node;
-  while (tmp != tree) {
-    tmp = tmp.parent;
+  while (tmp != root) {
+    tmp = tmp->parent;
     depth_first_node++;
   }
   tmp = second_node;
-  while (tmp != tree) {
-    tmp = tmp.parent;
+  while (tmp != root) {
+    tmp = tmp->parent;
     depth_second_node++;
   }
   int min_depth = std::min(depth_first_node, depth_second_node) - 1;
   Node *first_ancestor = first_node;
   Node *second_ancestor = second_node;
-  for (i = 0; i < depth_first_node - min_depth; i++)
-    first_ancestor = first_ancestor.parent;
-  for (i = 0; i < depth_second_node - min_depth; i++)
-    second_ancestor = second_ancestor.parent;
+  for (int i = 0; i < (depth_first_node - min_depth); i++)
+    first_ancestor = first_ancestor->parent;
+  for (int i = 0; i < (depth_second_node - min_depth); i++)
+    second_ancestor = second_ancestor->parent;
   while (first_ancestor != second_ancestor) {
-    first_ancestor = first_ancestor.parent;
-    second_ancestor = second_ancestor.parent;
+    first_ancestor = first_ancestor->parent;
+    second_ancestor = second_ancestor->parent;
   }
   return first_ancestor;
 }
