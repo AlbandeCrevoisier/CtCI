@@ -59,7 +59,7 @@ std::vector<int> BuildOrder(std::vector<int> projects,
 
 int main(void) {
   std::vector<int> p = {0, 1, 2, 3, 4, 5};
-  std::vector<std::pair<int, int>> dep = {{0,1},{0,2},{1,2},{1,3},{2,3},{2,4}};
+  std::vector<std::pair<int, int>> dep = {{2,1},{2,0},{1,0},{1,3},{0,3},{0,4}};
   std::vector<int> bo = BuildOrder(p, dep);
   for (auto e : bo)
     std::cout << e << std::endl;
