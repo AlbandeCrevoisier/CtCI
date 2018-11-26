@@ -1,7 +1,9 @@
 /* Next number
 Given a positive integer, print the next smallest and the next largest number
 that have the same number of 1s in their binary representation.
-Assumption: 32-bit integers. */
+Assumption: 32-bit integers.
+Note: this is actually terribly false, I dived too fast before thinking enough.
+Let that be a lesson.*/
 
 #include <iostream>
 #include <cstdint>
