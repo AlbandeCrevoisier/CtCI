@@ -1,66 +1,73 @@
 /* Next number
 Given a positive integer, print the next smallest and the next largest number
 that have the same number of 1s in their binary representation.
-Assumption: 32-bit integers.
-Note: this is actually terribly false, I dived too fast before thinking enough.
-Let that be a lesson.*/
+Assumption: 32-bit integers. */
 
 #include <iostream>
 #include <cstdint>
 
 namespace {
 
-struct Pair {
-  uint32_t min, max;
-};
+uint32_t NextNumber(uint32_t n) {
+  uint32_t m = n;
+  while ((m & 1 << 31) == (1 << 31))
+    m <<= 1;
+  if (m == 0)
+    return n;
 
-void NextNumber(uint32_t u, Pair &p) {
-  if (u == 0 || ~u == 0) {
-    p.min = u;
-    p.max = u;
+  /* bit 0:i-1 0s
+   * bit i:j-1 1s
+   * Change 0(1..1)(0..0) into 1(0..0)(1..1) */
+  m = n;
+  int i = 0, j = 0;
+  while (m & 1 == 0) {
+    i++;
+    m >>= 1;
   }
+  while (m & 1 == 1) {
+    j++;
+    m >>= 1;
+  }
+  n += 1 << i;
+  for (int k = 0; k < j-1; k++)
+    n |= 1 << k;
+  return n;
+}
 
-  p.min = 0;
-  p.max = 0;
-  int t = u;
-  while ((t & 1) == 1)
-    t >>= 1;
-  if (t == 0)
-    p.min = u;
-  t = u;
-  while ((t & (1 << 31)) == 1)
-    t <<= 1;
-  if (t == 0)
-    p.max = u;
+uint32_t PrevNumber(uint32_t n) {
+  uint32_t m = n;
+  while (m & 1 == 1)
+    m >>= 1;
+  if (m == 0)
+    return n;
 
-  t = u;
-  if (p.min == 0) {
-    int i;
-    for (i = 0; i < 32; i++) {
-      if ((t & 1) == 0 && ((t >> 1) & 1) == 1)
-        break;
-      t >>= 1;
-    }
-    p.min = (u & ~(1 << i + 1)) | (1 << i);
+  /* bit 0:i-1 1s
+   * bit i:j-1 0s
+   * Change 1(0..0)(1..1) into 0(1..1)(0..0) */
+  m = n;
+  int i = 0, j = 0;
+  while (m & 1 == 1) {
+    m >>= 1;
+    i++;
   }
-  t = u;
-  if (p.max == 0) {
-    int i;
-    for (i = 0; i < 32; i++) {
-      if ((t & 1) == 1 && ((t >> 1) & 1) == 0)
-        break;
-      t >>= 1;
-    }
-    p.max = (u & ~(1 << i)) | (1 << i + 1);
+  while (m & 1 == 0) {
+    m >>= 1;
+    j++;
   }
+  n += 1;
+  n -= 1 << (i + 1);
+  return n;
+}
+
+void PrevNextNumbers(uint32_t n) {
+  std::cout << "Next:" << NextNumber(n) << std::endl;
+  std::cout << "Prev:" << PrevNumber(n) << std::endl;
 }
 
 } //namespace
 
 int main(void) {
-  Pair p;
-  NextNumber(1337, p);
-  std::cout << p.min << ":" << p.max << std::endl;
+  PrevNextNumbers(1337);
   return 0;
 }
 
