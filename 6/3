@@ -1,0 +1,8 @@
+/* Dominos
+8x8 chessboard, two diag opposite corners have been cut.
+31 dominos = 2 squares
+Can we cover the entire chessboard? */
+
+30 black squares, 32 white one, each domino covers one black and one white, so
+it is impossible to fit the board.
+
