@@ -1,0 +1,11 @@
+/* Heavy Pill
+20 bottles of pills
+19 : 1g pills
+1 : 1.1g pills
+Exact scale, use only once. */
+
+Label bottles from 1 to 20.
+For each bottle, put as many pills on the scale as its label number.
+Total weight = (20 * 21) / 2 + n / 10
+So n = 10 * total_weight - 2100
+
